@@ -64,9 +64,19 @@ app.post('/',(req,res) => {
    }
 })
 
-app.delete('/name', async (req,res) => {
-  let destroy = await Employee.find({name: req.params.name})
-  console.log(destroy)
+app.post('/:name', async (req,res) => {
+  try{
+    let destroy = await Employee.deleteMany({ name: req.params.name  })
+    if(destroy.deletedCount === 1){
+      console.log(`Successfully deleted one document with the name: ${req.params.name}`);
+    } else {
+      console.log('No document found with that name');
+    }
+    console.log(destroy)
+  } catch(error){
+    console.error(error)
+  }
+  
 })
 
 
