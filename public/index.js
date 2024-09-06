@@ -14,7 +14,7 @@ $(document).ready(function(){
 
     let nameParts = fullname.split(" ") 
     let name = nameParts[0]
-    console.log("This is the frstname : ",name)
+    //console.log("This is the frstname : ",name)
 
       $.ajax({
       type: 'post',
@@ -28,7 +28,7 @@ $(document).ready(function(){
     let fullname = $(this).find('strong').text();
     let firstname = fullname.split(" ")
     let name = firstname[0]
-    console.log(name)
+    //console.log(name)
     
     // Send an AJAX request to get the employee details
     $.ajax({
@@ -36,9 +36,28 @@ $(document).ready(function(){
         type: 'GET',
         success: function(employee) {
             // Display the employee details
+
+            let age = getAge(employee.date)
+
+            function getAge(birthdayValue) {
+              const currentDate = new Date();
+              const birthdayDate = new Date(birthdayValue);
+              let age = currentDate.getFullYear() - birthdayDate.getFullYear();
+              const month = currentDate.getMonth() - birthdayDate.getMonth();
+            
+              if (
+                month < 0 ||
+                (month === 0 && currentDate.getDate() < birthdayDate.getDate())
+              ) {
+                age--;
+              }
+            
+              return age;
+            }
+
           
               $('.information').html(
-                `<p><strong><span class="name-info font-weight-bolder">${employee.name} ${employee.lastname}</span> <span class="age">(20)</span></strong></p>
+                `<p><strong><span class="name-info font-weight-bolder">${(employee.name).toUpperCase()} ${(employee.lastname).toUpperCase()}</span> <span class="age">(${age})</span></strong></p>
                   <p class="address-info">${employee.address}</p>
                   <p class="email-info">${employee.email}</p>
                   <p class="phone-info">Mobile - <span class="phone-nb">${employee.contact}</span></p>
