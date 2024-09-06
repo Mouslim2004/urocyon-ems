@@ -37,7 +37,7 @@
                       <input type="text" class="form-control" placeholder="First Name" name="name">
                     </div>
                     <div class="col">
-                      <input type="text" class="form-control" placeholder="Last Name" name="password">
+                      <input type="text" class="form-control" placeholder="Last Name" name="lastname">
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -66,15 +66,12 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-outline-success w-100" data-bs-dismiss="modal">Submit</button>
+                    <button type="submit" class="btn btn-outline-success w-100" >Submit</button> 
+                    <!-- data-bs-dismiss="modal" -->
                   </div>
+                  
                 </form>
             </div>
-
-            <!-- Modal footer -->
-            <!-- <div class="modal-footer">
-              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-            </div> -->
 
           </div>
         </div>
@@ -93,19 +90,37 @@
           <div class="col-xxl-4 text-white p-3 border-end">
             <div class="alert alert-secondary alert-dismissible">
               <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-              <strong>Mouslim Ombadi</strong> 
+              <strong class="name-data">Mouslim Ombadi</strong> 
             </div>
             <div class="alert alert-secondary alert-dismissible">
               <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
-              <strong>Scincus Urocyon</strong> 
+              <strong class="name-data">Scincus Urocyon</strong> 
             </div>
+           
+              <% if (typeof show !== 'undefined' && show.length > 0) { %>
+                <% for(var i = 0; i < show.length; i++) { %>
+                  <div class="alert alert-secondary alert-dismissible">
+                    <button type="button" class="btn-close " data-bs-dismiss="alert"></button>
+                  <strong><%= show[i].name %> <%= show[i].lastname %></strong>
+                </div>
+                <% } %>
+              <% } else { %>
+                <div class="alert alert-secondary alert-dismissible">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  <p>No data available.</p>
+              </div>
+                
+              <% } %>
+              
+           
+           
           </div>
           <div class="col-xxl-8 text-dark p-3 d-flex justify-content-center flex-column">
              <div class="d-flex justify-content-center">
                <img src="/image/profile.jpeg">
              </div>
              <div class="information text-center">
-                  <p> <span class="name-info">MOUSLIM OMBADI</span> <span class="age">(20)</span></p>
+                  <p><strong><span class="name-info font-weight-bolder">MOUSLIM OMBADI</span> <span class="age">(20)</span></strong></p>
                   <p class="address-info">Address</p>
                   <p class="email-info">mouslim@gmail.com</p>
                   <p class="phone-info">Mobile - <span class="phone-nb">0600981188</span></p>
