@@ -21,36 +21,45 @@ $(document).ready(function(){
       url: '/' + name
     });
   })
+   // Event handler for "View Details" button
+   $('.alert').on('click', function() {
+    // Get the name from the data attribute
+    //let name = $(this).closest('.employee').data('name'); 
+    let fullname = $(this).find('strong').text();
+    let firstname = fullname.split(" ")
+    let name = firstname[0]
+    console.log(name)
+    
+    // Send an AJAX request to get the employee details
+    $.ajax({
+        url: `/employee/${name}`,
+        type: 'GET',
+        success: function(employee) {
+            // Display the employee details
+            $('.information').html(
+                `<p><strong><span class="name-info font-weight-bolder">${employee.name} ${employee.lastname}</span> <span class="age">(20)</span></strong></p>
+                  <p class="address-info">${employee.address}</p>
+                  <p class="email-info">${employee.email}</p>
+                  <p class="phone-info">Mobile - <span class="phone-nb">${employee.contact}</span></p>
+                  <p class="dob-info">DOB - <span class="dob">${employee.date}</span></p>
+                  `
+            );
+        },
+        error: function(xhr) {
+            $('#employee-info').html('<p>Employee not found.</p>');
+        }
+    });
 
-  // $('.btn-close').click(() => {
-  //   //let doc = $('.alert').text().replace(/ /g, "-")
-  //   let firstname = $(".alert strong").text()
-  //   console.log(firstname)
-  //   let search = $(`strong.name-data:contains(${firstname})`).text();
-  //   let nameParts = firstname.split(" ") 
-  //   let name = nameParts[0]
-  //   console.log(name)
 
-  //   // let name = $('.name-data:contains("Mouslim Ombadi")').text();
-  //   $.ajax({
-  //     type: 'post',
-  //     url: '/' + name,
-  //     success: function(data){
-  //       //do sth with the data via front-end framework
-  //       location.reload();
-  //       //$(this).remove();
-  //       console.log(data);
-  //     }
-  //   //alert('hello');
-  //   });
-  // } )
+  // $('.alert').on('click', function() {
 
-  // $('.alert').click(function(){
-  //   let name = $('.name-data').text()
-  //   let nameParts = name.split(" ") 
-  //   let firstname = nameParts[0]
-  //   console.log(firstname)
-  // })
+  //   // Retrieve the text inside the <strong> element (name)
+  //   // let fullname = $(this).find('strong').text();
+  //   // let firstname = fullname.split(" ")
+  //   // let name = firstname[0]
+  //   // console.log(name)
+    
+   
+  //  });
   
-  
-})
+})})

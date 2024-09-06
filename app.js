@@ -79,6 +79,20 @@ app.post('/:name', async (req,res) => {
   
 })
 
+// Route to get employee details by name
+app.get('/employee/:name', async (req, res) => {
+  try {
+    const employee = await Employee.findOne({ name: req.params.name });
+    if (employee) {
+      res.json(employee);
+    } else {
+      res.status(404).json({ message: 'Employee not found' });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 const PORT = process.env.PORT || 4200
 
