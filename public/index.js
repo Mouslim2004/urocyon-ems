@@ -36,7 +36,8 @@ $(document).ready(function(){
         type: 'GET',
         success: function(employee) {
             // Display the employee details
-            $('.information').html(
+          
+              $('.information').html(
                 `<p><strong><span class="name-info font-weight-bolder">${employee.name} ${employee.lastname}</span> <span class="age">(20)</span></strong></p>
                   <p class="address-info">${employee.address}</p>
                   <p class="email-info">${employee.email}</p>
@@ -44,9 +45,11 @@ $(document).ready(function(){
                   <p class="dob-info">DOB - <span class="dob">${employee.date}</span></p>
                   `
             );
+            
+           
         },
         error: function(xhr) {
-            $('#employee-info').html('<p>Employee not found.</p>');
+            $('.information').html('<p>Employee not found.</p>');
         }
     });
 
