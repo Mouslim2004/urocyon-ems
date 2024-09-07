@@ -6,6 +6,9 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "mongoose": "^8.6.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "netlify-cli": "^17.35.0",
+    "netlify-lambda": "^2.0.16",
+    "serverless-http": "^3.2.0"
   }
 }
