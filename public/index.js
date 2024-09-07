@@ -64,6 +64,24 @@ $(document).ready(function(){
         }
     });
 
+    $('#form').on('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+      
+      // Perform an AJAX request (or just submit the form normally)
+      $.ajax({
+          url: '/',
+          type: 'post',
+          success: function(response) {
+              console.log('Form submitted successfully');
+              // Reload the page
+              window.location.reload();
+          },
+          error: function() {
+              console.error('Error submitting the form');
+          }
+      });
+  });
+
 
   // $('.alert').on('click', function() {
 
