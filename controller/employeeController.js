@@ -92,7 +92,7 @@ const search = async (req,res) => {
   try {
     const employee = await Employee.findOne({ name: req.params.name });
     if (employee) {
-      res.json(employee);
+      return res.json(employee);
     } else {
       res.status(404).json({ message: 'Employee not found' });
     }
