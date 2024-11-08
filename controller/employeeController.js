@@ -32,7 +32,7 @@ const login = async (req,res) => {
     const check = await Admin.findOne({email: email})
 
     if(check && check.password === password){
-      req.session.user = { id: check._id.toString(), email: check.email };
+      req.session.user = check;
       res.redirect('/')
     } else {
       res.render('login', {message: 'Invalid email or password'})

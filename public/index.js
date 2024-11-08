@@ -92,5 +92,31 @@ $(document).ready(function(){
           }
       });
   });
+
+  $('#loginForm').on('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    let formData = {  
+      email: $('#email').val(),
+      password: $('#password').val()
+    }
+    
+    // Perform an AJAX request (or just submit the form normally)
+    $.ajax({
+        url: '/',
+        type: 'post',
+        data: formData,
+        success: function(response) {
+            console.log('Login successfully');
+            // Reload the page
+            $('#email').val('')
+            $('#password').val('')
+            window.location.reload();
+        },
+        error: function() {
+            console.error('Error submitting the form');
+        }
+    });
+});
   
 })})
