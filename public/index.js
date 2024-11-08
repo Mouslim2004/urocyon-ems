@@ -66,11 +66,22 @@ $(document).ready(function(){
 
     $('#form').on('submit', function(event) {
       event.preventDefault(); // Prevent the default form submission
+
+      let formData = {
+        name: $('#name').val(),
+        lastname: $('#lastname').val(),
+        email: $('#email').val(),
+        contact: $('#contact').val(),
+        salary: $('#salary').val(),
+        address: $('#address').val(),
+        date: $('#date').val()
+      }
       
       // Perform an AJAX request (or just submit the form normally)
       $.ajax({
           url: '/',
           type: 'post',
+          data: formData,
           success: function(response) {
               console.log('Form submitted successfully');
               // Reload the page
@@ -81,17 +92,5 @@ $(document).ready(function(){
           }
       });
   });
-
-
-  // $('.alert').on('click', function() {
-
-  //   // Retrieve the text inside the <strong> element (name)
-  //   // let fullname = $(this).find('strong').text();
-  //   // let firstname = fullname.split(" ")
-  //   // let name = firstname[0]
-  //   // console.log(name)
-    
-   
-  //  });
   
 })})
