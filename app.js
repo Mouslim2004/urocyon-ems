@@ -34,65 +34,67 @@ app.use(bodyParser.json())
 
 app.use(express.static('public'))
 
-app.get('/', async(req,res) => {
-  const show = await Employee.find()
-  res.render('index', {show: show})
-})
+// app.get('/', async(req,res) => {
+//   const show = await Employee.find()
+//   res.render('index', {show: show})
+// })
 
-app.post('/',(req,res) => {
-  let data = {
-    name: req.body.name,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    contact: req.body.contact,
-    salary: req.body.salary,
-    address: req.body.address,
-    date: req.body.date
-  }
-   if(data.name == "" || data.lastname == "" ||
-    data.email == "" || data.contact == "" ||
-    data.salary == "" || data.address == "" ||
-    data.date == ""
-   ) {
-    req.flash('error','Please! Fill the form')
-    return res.redirect('/')
-   } else {
-    Employee.insertMany([data])
+// app.post('/',(req,res) => {
+//   let data = {
+//     name: req.body.name,
+//     lastname: req.body.lastname,
+//     email: req.body.email,
+//     contact: req.body.contact,
+//     salary: req.body.salary,
+//     address: req.body.address,
+//     date: req.body.date
+//   }
+//    if(data.name == "" || data.lastname == "" ||
+//     data.email == "" || data.contact == "" ||
+//     data.salary == "" || data.address == "" ||
+//     data.date == ""
+//    ) {
+//     req.flash('error','Please! Fill the form')
+//     return res.redirect('/')
+//    } else {
+//     Employee.insertMany([data])
 
-    res.render('index')
-    console.log(data)
-   }
-})
+//     res.render('index')
+//     console.log(data)
+//    }
+// })
 
-app.post('/:name', async (req,res) => {
-  try{
-    let destroy = await Employee.deleteMany({ name: req.params.name  })
-    if(destroy.deletedCount === 1){
-      console.log(`Successfully deleted one document with the name: ${req.params.name}`);
-    } else {
-      console.log('No document found with that name');
-    }
-    console.log(destroy)
-  } catch(error){
-    console.error(error)
-  }
+// app.post('/:name', async (req,res) => {
+//   try{
+//     let destroy = await Employee.deleteMany({ name: req.params.name  })
+//     if(destroy.deletedCount === 1){
+//       console.log(`Successfully deleted one document with the name: ${req.params.name}`);
+//     } else {
+//       console.log('No document found with that name');
+//     }
+//     console.log(destroy)
+//   } catch(error){
+//     console.error(error)
+//   }
   
-})
+// })
 
-// Route to get employee details by name
-app.get('/employee/:name', async (req, res) => {
-  try {
-    const employee = await Employee.findOne({ name: req.params.name });
-    if (employee) {
-      res.json(employee);
-    } else {
-      res.status(404).json({ message: 'Employee not found' });
-    }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Server error' });
-  }
-});
+// // Route to get employee details by name
+// app.get('/employee/:name', async (req, res) => {
+//   try {
+//     const employee = await Employee.findOne({ name: req.params.name });
+//     if (employee) {
+//       res.json(employee);
+//     } else {
+//       res.status(404).json({ message: 'Employee not found' });
+//     }
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// });
+const employeeRoutes = require('./routes/employeeRoutes')
+app.use('/', employeeRoutes)
 
 const PORT = process.env.PORT || 4200
 
